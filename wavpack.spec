@@ -4,7 +4,7 @@
 #
 Name     : wavpack
 Version  : 5.1.0
-Release  : 2
+Release  : 3
 URL      : http://wavpack.com/wavpack-5.1.0.tar.bz2
 Source0  : http://wavpack.com/wavpack-5.1.0.tar.bz2
 Summary  : wavpack library
@@ -14,6 +14,11 @@ Requires: wavpack-bin = %{version}-%{release}
 Requires: wavpack-lib = %{version}-%{release}
 Requires: wavpack-license = %{version}-%{release}
 Requires: wavpack-man = %{version}-%{release}
+Patch1: CVE-2018-6767.patch
+Patch2: CVE-2018-7253.patch
+Patch3: CVE-2018-7254.patch
+Patch4: CVE-2018-10536.patch
+Patch5: CVE-2018-10538.patch
 
 %description
 ////////////////////////////////////////////////////////////////////////////
@@ -71,13 +76,23 @@ man components for the wavpack package.
 
 %prep
 %setup -q -n wavpack-5.1.0
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1547515480
+export SOURCE_DATE_EPOCH=1551414912
+export LDFLAGS="${LDFLAGS} -fno-lto"
+export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -89,7 +104,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1547515480
+export SOURCE_DATE_EPOCH=1551414912
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/wavpack
 cp COPYING %{buildroot}/usr/share/package-licenses/wavpack/COPYING

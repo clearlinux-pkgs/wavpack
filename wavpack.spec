@@ -4,7 +4,7 @@
 #
 Name     : wavpack
 Version  : 5.1.0
-Release  : 5
+Release  : 6
 URL      : http://wavpack.com/wavpack-5.1.0.tar.bz2
 Source0  : http://wavpack.com/wavpack-5.1.0.tar.bz2
 Summary  : wavpack library
@@ -20,7 +20,10 @@ Patch3: CVE-2018-7254.patch
 Patch4: CVE-2018-10536.patch
 Patch5: CVE-2018-10538.patch
 Patch6: CVE-2018-19840.patch
-Patch7: CVE-2019-11498.patch
+Patch7: CVE-2019-1010315.patch
+Patch8: CVE-2019-1010317.patch
+Patch9: CVE-2019-1010319.patch
+Patch10: CVE-2019-11498.patch
 
 %description
 ////////////////////////////////////////////////////////////////////////////
@@ -85,30 +88,33 @@ man components for the wavpack package.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1556645279
-export LDFLAGS="${LDFLAGS} -fno-lto"
-export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1563307065
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1556645279
+export SOURCE_DATE_EPOCH=1563307065
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/wavpack
 cp COPYING %{buildroot}/usr/share/package-licenses/wavpack/COPYING

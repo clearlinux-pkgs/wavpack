@@ -4,9 +4,9 @@
 #
 Name     : wavpack
 Version  : 5.1.0
-Release  : 6
-URL      : http://wavpack.com/wavpack-5.1.0.tar.bz2
-Source0  : http://wavpack.com/wavpack-5.1.0.tar.bz2
+Release  : 7
+URL      : https://wavpack.com/wavpack-5.1.0.tar.bz2
+Source0  : https://wavpack.com/wavpack-5.1.0.tar.bz2
 Summary  : wavpack library
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -97,7 +97,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1563307065
+export SOURCE_DATE_EPOCH=1567297268
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -114,7 +114,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1563307065
+export SOURCE_DATE_EPOCH=1567297268
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/wavpack
 cp COPYING %{buildroot}/usr/share/package-licenses/wavpack/COPYING

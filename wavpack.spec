@@ -4,7 +4,7 @@
 #
 Name     : wavpack
 Version  : 5.1.0
-Release  : 7
+Release  : 8
 URL      : https://wavpack.com/wavpack-5.1.0.tar.bz2
 Source0  : https://wavpack.com/wavpack-5.1.0.tar.bz2
 Summary  : wavpack library
@@ -81,6 +81,7 @@ man components for the wavpack package.
 
 %prep
 %setup -q -n wavpack-5.1.0
+cd %{_builddir}/wavpack-5.1.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -97,11 +98,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1567297268
+export SOURCE_DATE_EPOCH=1604362508
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static
 make  %{?_smp_mflags}
@@ -111,13 +112,13 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1567297268
+export SOURCE_DATE_EPOCH=1604362508
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/wavpack
-cp COPYING %{buildroot}/usr/share/package-licenses/wavpack/COPYING
+cp %{_builddir}/wavpack-5.1.0/COPYING %{buildroot}/usr/share/package-licenses/wavpack/e534545f964fb6ff4c2ac912f4592bc13d8ff168
 %make_install
 
 %files
@@ -143,7 +144,7 @@ cp COPYING %{buildroot}/usr/share/package-licenses/wavpack/COPYING
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/wavpack/COPYING
+/usr/share/package-licenses/wavpack/e534545f964fb6ff4c2ac912f4592bc13d8ff168
 
 %files man
 %defattr(0644,root,root,0755)

@@ -1,5 +1,5 @@
 PKG_NAME := wavpack
-URL = https://wavpack.com/wavpack-5.1.0.tar.bz2
+URL = https://www.wavpack.com/wavpack-5.5.0.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common

@@ -4,7 +4,7 @@
 #
 Name     : wavpack
 Version  : 5.5.0
-Release  : 10
+Release  : 11
 URL      : https://www.wavpack.com/wavpack-5.5.0.tar.xz
 Source0  : https://www.wavpack.com/wavpack-5.5.0.tar.xz
 Summary  : wavpack library
@@ -83,12 +83,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1657902593
+export SOURCE_DATE_EPOCH=1664896517
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -100,10 +100,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1657902593
+export SOURCE_DATE_EPOCH=1664896517
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/wavpack
-cp %{_builddir}/wavpack-5.5.0/COPYING %{buildroot}/usr/share/package-licenses/wavpack/c346a1628532ec3a23739bbbd203b8420a79fc6e
+cp %{_builddir}/wavpack-%{version}/COPYING %{buildroot}/usr/share/package-licenses/wavpack/c346a1628532ec3a23739bbbd203b8420a79fc6e || :
 %make_install
 
 %files

@@ -1,4 +1,6 @@
 Configure miss: 32-bit host C ABI
-Configure miss: XML catalog (/etc/xml/catalog)
+Configure miss: 32-bit host C ABI
 Configure miss: if we are building for a Windows host
-Configure miss: x86_64-generic-linux-gnu-file
+Configure miss: if we are building for a Windows host
+Configure miss: windres
+Configure miss: windres
